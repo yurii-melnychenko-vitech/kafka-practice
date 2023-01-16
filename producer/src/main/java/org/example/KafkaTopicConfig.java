@@ -40,15 +40,4 @@ public class KafkaTopicConfig {
 //                .build();
 ////        return new NewTopic("second_topic", 1, (short) 1);
 //    }
-
-//    @Bean
-//    public NewTopic deadLetterTopic(AppKafkaProperties properties) {
-//        // https://docs.spring.io/spring-kafka/docs/2.8.2/reference/html/#configuring-topics
-//        return TopicBuilder.name(ORDERS + properties.deadletter().suffix())
-//                // Use only one partition for infrequently used Dead Letter Topic
-//                .partitions(1)
-//                // Use longer retention for Dead Letter Topic, allowing for more time to troubleshoot
-//                .config(TopicConfig.RETENTION_MS_CONFIG, "" + properties.deadletter().retention().toMillis())
-//                .build();
-//    }
 }
