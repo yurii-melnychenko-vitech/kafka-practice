@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.model.AuditEvent;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;

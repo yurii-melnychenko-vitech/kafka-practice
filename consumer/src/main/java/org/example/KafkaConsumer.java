@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.model.AuditEvent;
 import org.springframework.kafka.annotation.DltHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.RetryableTopic;
@@ -20,15 +21,15 @@ public class KafkaConsumer {
             autoCreateTopics = "false",
             topicSuffixingStrategy = TopicSuffixingStrategy.SUFFIX_WITH_INDEX_VALUE)
     @KafkaListener(topics = "${audit-event-topic.name.consumer}", groupId = "${spring.kafka.consumer.group-id}")
-    public void listenAuditTopic(String auditEvent) {
-        if (auditEvent.contains("error")) {
+    public void listenAuditTopic(AuditEvent auditEvent) {
+        if (auditEvent.getEvent().contains("error")) {
             throw new RuntimeException("test kafka exception");
         }
         System.out.println("Received Message in group foo: " + auditEvent);
     }
 
     @DltHandler
-    public void dlt(String auditEvent) {
+    public void dlt(AuditEvent auditEvent) {
         System.out.println("dlt: " + auditEvent);
     }
 }
