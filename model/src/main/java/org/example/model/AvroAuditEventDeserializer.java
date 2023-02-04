@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model;
 
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.DatumReader;
@@ -7,6 +7,7 @@ import org.apache.avro.io.DecoderFactory;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.common.serialization.Deserializer;
+
 import java.util.Map;
 
 public class AvroAuditEventDeserializer<T extends SpecificRecordBase> implements Deserializer {

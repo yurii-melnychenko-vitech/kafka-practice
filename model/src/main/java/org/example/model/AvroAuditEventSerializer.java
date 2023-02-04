@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model;
 
 import org.apache.avro.generic.GenericDatumWriter;
 import org.apache.avro.generic.GenericRecord;
@@ -7,13 +7,11 @@ import org.apache.avro.io.DatumWriter;
 import org.apache.avro.io.EncoderFactory;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
-import org.example.model.AuditEvent;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class AvroAuditEventSerializer implements Serializer<AuditEvent> {
-
     @Override
     public byte[] serialize(String topic, AuditEvent data) {
         try {
