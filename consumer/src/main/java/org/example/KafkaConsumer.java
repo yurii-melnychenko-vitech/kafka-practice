@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class KafkaConsumer {
+    private final AuditEventRepository auditEventRepository;
+
+    public KafkaConsumer(AuditEventRepository auditEventRepository) {
+        this.auditEventRepository = auditEventRepository;
+    }
     @KafkaListener(
             topics = {"${first-topic.name.consumer}", "${second-topic.name.consumer}"},
             groupId = "${spring.kafka.consumer.group-id}",
@@ -28,6 +33,7 @@ public class KafkaConsumer {
         if (auditEvent.getEvent().contains("error")) {
             throw new RuntimeException("test kafka exception");
         }
+        this.auditEventRepository.save(auditEvent);
         System.out.println("Received Message in group foo: " + auditEvent);
     }
 

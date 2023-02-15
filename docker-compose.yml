@@ -1,6 +1,20 @@
 version: '3.7'
 services:
 
+  postgres:
+    image: postgres:13.3
+    container_name: postgres-practice
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5438:5432'
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - /docker-entrypoint-initdb.d
+      - /var/lib/postgresql/data
+
   zookeeper:
     image: wurstmeister/zookeeper
     container_name: zookeeper-kafka-practice
