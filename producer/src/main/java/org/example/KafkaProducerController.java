@@ -2,7 +2,6 @@ package org.example;
 
 import org.example.model.AuditEvent;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,16 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/kafka")
 public class KafkaProducerController {
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaProducerService service;
 
-    private final KafkaTemplate<String, AuditEvent> auditEventKafkaTemplate;
-
-    public KafkaProducerController(
-            KafkaTemplate<String, String> kafkaTemplate,
-            KafkaTemplate<String, AuditEvent> auditEventKafkaTemplate
-    ) {
-        this.kafkaTemplate = kafkaTemplate;
-        this.auditEventKafkaTemplate = auditEventKafkaTemplate;
+    public KafkaProducerController(KafkaProducerService service) {
+        this.service = service;
     }
 
     @PostMapping("/publish")
@@ -29,7 +22,7 @@ public class KafkaProducerController {
             @RequestParam("topicName") String topicName,
             @RequestParam("message") String message
     ) {
-        kafkaTemplate.send(topicName, message);
+        service.sendStringMessage(topicName, message);
         return ResponseEntity.ok("Message sent to kafka topic");
     }
 
@@ -38,7 +31,7 @@ public class KafkaProducerController {
             @RequestParam("topicName") String topicName,
             @RequestBody AuditEvent auditEvent
     ) {
-        auditEventKafkaTemplate.send(topicName, auditEvent);
+        service.sendAuditEventMessage(topicName, auditEvent);
         return ResponseEntity.ok("Message sent to kafka topic");
     }
 }
