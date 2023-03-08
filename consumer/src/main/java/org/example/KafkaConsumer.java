@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaConsumer {
     private final AuditEventRepository auditEventRepository;
-    public static AuditEvent receivedMessage;
+    public static AuditEvent validAuditEvent;
+    public static AuditEvent invalidAuditEvent;
 
     public KafkaConsumer(AuditEventRepository auditEventRepository) {
         this.auditEventRepository = auditEventRepository;
@@ -31,21 +32,25 @@ public class KafkaConsumer {
             topicSuffixingStrategy = TopicSuffixingStrategy.SUFFIX_WITH_INDEX_VALUE)
     @KafkaListener(topics = "${audit-event-topic.name.consumer}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenAuditTopic(AuditEvent auditEvent) {
-        System.out.println("-======================--------===============================--");
         if (auditEvent.getEvent().contains("error")) {
             throw new RuntimeException("test kafka exception");
         }
-        receivedMessage = auditEvent;
+        KafkaConsumer.validAuditEvent = auditEvent;
         this.auditEventRepository.save(auditEvent);
         System.out.println("Received Message in group foo: " + auditEvent);
     }
 
     @DltHandler
     public void dlt(AuditEvent auditEvent) {
+        invalidAuditEvent = auditEvent;
         System.out.println("dlt: " + auditEvent);
     }
 
-    public AuditEvent getData() {
-        return receivedMessage;
+    public AuditEvent getReceivedValidAuditEvent() {
+        return validAuditEvent;
+    }
+
+    public AuditEvent getReceivedInvalidAuditEvent() {
+        return invalidAuditEvent;
     }
 }
