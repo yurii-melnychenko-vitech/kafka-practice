@@ -6,14 +6,11 @@ services:
     container_name: postgres-practice
     restart: always
     environment:
+      - POSTGRES_DB=kafka_practice
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5438:5432'
-    volumes:
-      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
-      - /docker-entrypoint-initdb.d
-      - /var/lib/postgresql/data
 
   zookeeper:
     image: wurstmeister/zookeeper
