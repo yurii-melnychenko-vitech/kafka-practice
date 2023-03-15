@@ -8,11 +8,13 @@ import org.springframework.kafka.retrytopic.TopicSuffixingStrategy;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class KafkaConsumer {
     private final AuditEventRepository auditEventRepository;
-    public static AuditEvent validAuditEvent;
-    public static AuditEvent invalidAuditEvent;
+    public static List<AuditEvent> dltAuditEvents = new ArrayList<>();
 
     public KafkaConsumer(AuditEventRepository auditEventRepository) {
         this.auditEventRepository = auditEventRepository;
@@ -23,7 +25,7 @@ public class KafkaConsumer {
             containerFactory = "kafkaStringListenerContainerFactory"
     )
     public void listenStringTopics(String message) {
-        System.out.println("Received Message in string topic: " + message);
+        System.out.println("Received Message: " + message);
     }
 
     @RetryableTopic(
@@ -35,22 +37,14 @@ public class KafkaConsumer {
         if (auditEvent.getEvent().contains("error")) {
             throw new RuntimeException("test kafka exception");
         }
-        KafkaConsumer.validAuditEvent = auditEvent;
+
         this.auditEventRepository.save(auditEvent);
-        System.out.println("Received Message in group foo: " + auditEvent);
+        System.out.println("Received Message: " + auditEvent);
     }
 
     @DltHandler
     public void dlt(AuditEvent auditEvent) {
-        invalidAuditEvent = auditEvent;
+        dltAuditEvents.add(auditEvent);
         System.out.println("dlt: " + auditEvent);
-    }
-
-    public AuditEvent getReceivedValidAuditEvent() {
-        return validAuditEvent;
-    }
-
-    public AuditEvent getReceivedInvalidAuditEvent() {
-        return invalidAuditEvent;
     }
 }

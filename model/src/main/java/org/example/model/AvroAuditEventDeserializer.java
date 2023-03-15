@@ -8,18 +8,11 @@ import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.common.serialization.Deserializer;
 
-import java.util.Map;
-
 public class AvroAuditEventDeserializer<T extends SpecificRecordBase> implements Deserializer {
     protected final Class<T> targetType;
 
     public AvroAuditEventDeserializer(Class<T> targetType) {
         this.targetType = targetType;
-    }
-
-    @Override
-    public void configure(Map configs, boolean isKey) {
-        // do nothing
     }
 
     @Override
@@ -39,10 +32,5 @@ public class AvroAuditEventDeserializer<T extends SpecificRecordBase> implements
         }
 
         return returnObject;
-    }
-
-    @Override
-    public void close() {
-        // do nothing
     }
 }

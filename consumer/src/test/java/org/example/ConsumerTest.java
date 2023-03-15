@@ -72,7 +72,6 @@ public class ConsumerTest {
 
     private static final AuditEvent VALID_AUDIT_EVENT = AuditEvent.newBuilder()
             .setResourceType("type")
-            .setId("id")
             .setEvent("message test")
             .setParticipant(List.of("value1", "value2"))
             .setSource("source test")
@@ -80,7 +79,6 @@ public class ConsumerTest {
 
     private static final AuditEvent INVALID_AUDIT_EVENT = AuditEvent.newBuilder()
             .setResourceType("type")
-            .setId("id")
             .setEvent("error")
             .setParticipant(List.of("value1", "value2"))
             .setSource("source")
@@ -106,25 +104,23 @@ public class ConsumerTest {
 
         kafkaTemplate.send(AVRO_TOPIC, VALID_AUDIT_EVENT);
 
-//        Mockito.doNothing().when(auditEventRepository).save(Mockito.any());
+        await().until(() -> auditEventRepository.findAll().contains(VALID_AUDIT_EVENT));
 
-        await().until(() -> consumer.getReceivedValidAuditEvent() != null);
-
-        assertThat(consumer.getReceivedValidAuditEvent()).isEqualTo(VALID_AUDIT_EVENT);
+        List<AuditEvent> auditEvents = auditEventRepository.findAll();
+        assertThat(auditEvents.contains(VALID_AUDIT_EVENT)).isTrue();
+        assertThat(KafkaConsumer.dltAuditEvents.contains(VALID_AUDIT_EVENT)).isFalse();
     }
 
-//    @Test
-//    public void consumerReceiveInvalidMessageTest() {
-//        await().until(() -> checkIfConsumerReady(FIRST_GROUP_ID));
-//
-//        kafkaTemplate.send(AVRO_TOPIC, INVALID_AUDIT_EVENT);
-//
-//        Mockito.doNothing().when(auditEventRepository).save(Mockito.any());
-//
-//        await().until(() -> consumer.getReceivedInvalidAuditEvent() != null);
-//
-//        assertThat(consumer.getReceivedInvalidAuditEvent()).isEqualTo(INVALID_AUDIT_EVENT);
-//    }
+    @Test
+    public void consumerReceiveInvalidMessageTest() {
+        await().until(() -> checkIfConsumerReady(FIRST_GROUP_ID));
+
+        kafkaTemplate.send(AVRO_TOPIC, INVALID_AUDIT_EVENT);
+
+        await().until(() -> KafkaConsumer.dltAuditEvents.contains(INVALID_AUDIT_EVENT));
+
+        assertThat(KafkaConsumer.dltAuditEvents.contains(INVALID_AUDIT_EVENT)).isTrue();
+    }
 
     private static boolean checkIfConsumerReady(String groupId) {
         try {

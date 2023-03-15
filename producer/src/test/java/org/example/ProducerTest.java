@@ -20,7 +20,6 @@ import java.util.List;
 public class ProducerTest {
     private static final String AUDIT_EVENT_JSON = "{\n" +
             "\t\"resourceType\":\"type\",\n" +
-            "\t\"id\":\"id\",\n" +
             "\t\"event\":\"message\",\n" +
             "\t\"participant\":[\"value1\", \"value2\"],\n" +
             "\t\"source\":\"source\",\n" +
@@ -28,7 +27,6 @@ public class ProducerTest {
             "}";
     private static final AuditEvent AUDIT_EVENT_OBJECT = AuditEvent.newBuilder()
             .setResourceType("type")
-            .setId("id")
             .setEvent("message")
             .setParticipant(List.of("value1", "value2"))
             .setSource("source")

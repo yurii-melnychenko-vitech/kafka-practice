@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -3456869092622236564L;
+  private static final long serialVersionUID = -8901160116830925836L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AuditEvent\",\"namespace\":\"org.example.model\",\"fields\":[{\"name\":\"resourceType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"event\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"participant\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"java-class\":\"java.util.ArrayList\"},{\"name\":\"source\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"object\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"java-class\":\"java.util.ArrayList\"}],\"version\":\"1\"}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AuditEvent\",\"namespace\":\"org.example.model\",\"fields\":[{\"name\":\"resourceType\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"event\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"participant\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"java-class\":\"java.util.ArrayList\"},{\"name\":\"source\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"object\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},\"java-class\":\"java.util.ArrayList\"}],\"version\":\"1\"}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -74,7 +74,6 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
   }
 
   private java.lang.String resourceType;
-  private java.lang.String id;
   private java.lang.String event;
   private java.util.List<java.lang.String> participant;
   private java.lang.String source;
@@ -90,15 +89,13 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
   /**
    * All-args constructor.
    * @param resourceType The new value for resourceType
-   * @param id The new value for id
    * @param event The new value for event
    * @param participant The new value for participant
    * @param source The new value for source
    * @param object The new value for object
    */
-  public AuditEvent(java.lang.String resourceType, java.lang.String id, java.lang.String event, java.util.List<java.lang.String> participant, java.lang.String source, java.util.List<java.lang.String> object) {
+  public AuditEvent(java.lang.String resourceType, java.lang.String event, java.util.List<java.lang.String> participant, java.lang.String source, java.util.List<java.lang.String> object) {
     this.resourceType = resourceType;
-    this.id = id;
     this.event = event;
     this.participant = participant;
     this.source = source;
@@ -116,11 +113,10 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return resourceType;
-    case 1: return id;
-    case 2: return event;
-    case 3: return participant;
-    case 4: return source;
-    case 5: return object;
+    case 1: return event;
+    case 2: return participant;
+    case 3: return source;
+    case 4: return object;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -131,11 +127,10 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: resourceType = value$ != null ? value$.toString() : null; break;
-    case 1: id = value$ != null ? value$.toString() : null; break;
-    case 2: event = value$ != null ? value$.toString() : null; break;
-    case 3: participant = (java.util.List<java.lang.String>)value$; break;
-    case 4: source = value$ != null ? value$.toString() : null; break;
-    case 5: object = (java.util.List<java.lang.String>)value$; break;
+    case 1: event = value$ != null ? value$.toString() : null; break;
+    case 2: participant = (java.util.List<java.lang.String>)value$; break;
+    case 3: source = value$ != null ? value$.toString() : null; break;
+    case 4: object = (java.util.List<java.lang.String>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -155,23 +150,6 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
    */
   public void setResourceType(java.lang.String value) {
     this.resourceType = value;
-  }
-
-  /**
-   * Gets the value of the 'id' field.
-   * @return The value of the 'id' field.
-   */
-  public java.lang.String getId() {
-    return id;
-  }
-
-
-  /**
-   * Sets the value of the 'id' field.
-   * @param value the value to set.
-   */
-  public void setId(java.lang.String value) {
-    this.id = value;
   }
 
   /**
@@ -284,7 +262,6 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
     implements org.apache.avro.data.RecordBuilder<AuditEvent> {
 
     private java.lang.String resourceType;
-    private java.lang.String id;
     private java.lang.String event;
     private java.util.List<java.lang.String> participant;
     private java.lang.String source;
@@ -305,25 +282,21 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
         this.resourceType = data().deepCopy(fields()[0].schema(), other.resourceType);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.id)) {
-        this.id = data().deepCopy(fields()[1].schema(), other.id);
+      if (isValidValue(fields()[1], other.event)) {
+        this.event = data().deepCopy(fields()[1].schema(), other.event);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.event)) {
-        this.event = data().deepCopy(fields()[2].schema(), other.event);
+      if (isValidValue(fields()[2], other.participant)) {
+        this.participant = data().deepCopy(fields()[2].schema(), other.participant);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.participant)) {
-        this.participant = data().deepCopy(fields()[3].schema(), other.participant);
+      if (isValidValue(fields()[3], other.source)) {
+        this.source = data().deepCopy(fields()[3].schema(), other.source);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.source)) {
-        this.source = data().deepCopy(fields()[4].schema(), other.source);
+      if (isValidValue(fields()[4], other.object)) {
+        this.object = data().deepCopy(fields()[4].schema(), other.object);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
-      }
-      if (isValidValue(fields()[5], other.object)) {
-        this.object = data().deepCopy(fields()[5].schema(), other.object);
-        fieldSetFlags()[5] = other.fieldSetFlags()[5];
       }
     }
 
@@ -337,25 +310,21 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
         this.resourceType = data().deepCopy(fields()[0].schema(), other.resourceType);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.id)) {
-        this.id = data().deepCopy(fields()[1].schema(), other.id);
+      if (isValidValue(fields()[1], other.event)) {
+        this.event = data().deepCopy(fields()[1].schema(), other.event);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.event)) {
-        this.event = data().deepCopy(fields()[2].schema(), other.event);
+      if (isValidValue(fields()[2], other.participant)) {
+        this.participant = data().deepCopy(fields()[2].schema(), other.participant);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.participant)) {
-        this.participant = data().deepCopy(fields()[3].schema(), other.participant);
+      if (isValidValue(fields()[3], other.source)) {
+        this.source = data().deepCopy(fields()[3].schema(), other.source);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.source)) {
-        this.source = data().deepCopy(fields()[4].schema(), other.source);
+      if (isValidValue(fields()[4], other.object)) {
+        this.object = data().deepCopy(fields()[4].schema(), other.object);
         fieldSetFlags()[4] = true;
-      }
-      if (isValidValue(fields()[5], other.object)) {
-        this.object = data().deepCopy(fields()[5].schema(), other.object);
-        fieldSetFlags()[5] = true;
       }
     }
 
@@ -400,46 +369,6 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
     }
 
     /**
-      * Gets the value of the 'id' field.
-      * @return The value.
-      */
-    public java.lang.String getId() {
-      return id;
-    }
-
-
-    /**
-      * Sets the value of the 'id' field.
-      * @param value The value of 'id'.
-      * @return This builder.
-      */
-    public org.example.model.AuditEvent.Builder setId(java.lang.String value) {
-      validate(fields()[1], value);
-      this.id = value;
-      fieldSetFlags()[1] = true;
-      return this;
-    }
-
-    /**
-      * Checks whether the 'id' field has been set.
-      * @return True if the 'id' field has been set, false otherwise.
-      */
-    public boolean hasId() {
-      return fieldSetFlags()[1];
-    }
-
-
-    /**
-      * Clears the value of the 'id' field.
-      * @return This builder.
-      */
-    public org.example.model.AuditEvent.Builder clearId() {
-      id = null;
-      fieldSetFlags()[1] = false;
-      return this;
-    }
-
-    /**
       * Gets the value of the 'event' field.
       * @return The value.
       */
@@ -454,9 +383,9 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       * @return This builder.
       */
     public org.example.model.AuditEvent.Builder setEvent(java.lang.String value) {
-      validate(fields()[2], value);
+      validate(fields()[1], value);
       this.event = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[1] = true;
       return this;
     }
 
@@ -465,7 +394,7 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       * @return True if the 'event' field has been set, false otherwise.
       */
     public boolean hasEvent() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[1];
     }
 
 
@@ -475,7 +404,7 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       */
     public org.example.model.AuditEvent.Builder clearEvent() {
       event = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -494,9 +423,9 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       * @return This builder.
       */
     public org.example.model.AuditEvent.Builder setParticipant(java.util.List<java.lang.String> value) {
-      validate(fields()[3], value);
+      validate(fields()[2], value);
       this.participant = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -505,7 +434,7 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       * @return True if the 'participant' field has been set, false otherwise.
       */
     public boolean hasParticipant() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[2];
     }
 
 
@@ -515,7 +444,7 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       */
     public org.example.model.AuditEvent.Builder clearParticipant() {
       participant = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -534,9 +463,9 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       * @return This builder.
       */
     public org.example.model.AuditEvent.Builder setSource(java.lang.String value) {
-      validate(fields()[4], value);
+      validate(fields()[3], value);
       this.source = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -545,7 +474,7 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       * @return True if the 'source' field has been set, false otherwise.
       */
     public boolean hasSource() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[3];
     }
 
 
@@ -555,7 +484,7 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       */
     public org.example.model.AuditEvent.Builder clearSource() {
       source = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -574,9 +503,9 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       * @return This builder.
       */
     public org.example.model.AuditEvent.Builder setObject(java.util.List<java.lang.String> value) {
-      validate(fields()[5], value);
+      validate(fields()[4], value);
       this.object = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -585,7 +514,7 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       * @return True if the 'object' field has been set, false otherwise.
       */
     public boolean hasObject() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[4];
     }
 
 
@@ -595,7 +524,7 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       */
     public org.example.model.AuditEvent.Builder clearObject() {
       object = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -605,11 +534,10 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       try {
         AuditEvent record = new AuditEvent();
         record.resourceType = fieldSetFlags()[0] ? this.resourceType : (java.lang.String) defaultValue(fields()[0]);
-        record.id = fieldSetFlags()[1] ? this.id : (java.lang.String) defaultValue(fields()[1]);
-        record.event = fieldSetFlags()[2] ? this.event : (java.lang.String) defaultValue(fields()[2]);
-        record.participant = fieldSetFlags()[3] ? this.participant : (java.util.List<java.lang.String>) defaultValue(fields()[3]);
-        record.source = fieldSetFlags()[4] ? this.source : (java.lang.String) defaultValue(fields()[4]);
-        record.object = fieldSetFlags()[5] ? this.object : (java.util.List<java.lang.String>) defaultValue(fields()[5]);
+        record.event = fieldSetFlags()[1] ? this.event : (java.lang.String) defaultValue(fields()[1]);
+        record.participant = fieldSetFlags()[2] ? this.participant : (java.util.List<java.lang.String>) defaultValue(fields()[2]);
+        record.source = fieldSetFlags()[3] ? this.source : (java.lang.String) defaultValue(fields()[3]);
+        record.object = fieldSetFlags()[4] ? this.object : (java.util.List<java.lang.String>) defaultValue(fields()[4]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -643,8 +571,6 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
     throws java.io.IOException
   {
     out.writeString(this.resourceType);
-
-    out.writeString(this.id);
 
     out.writeString(this.event);
 
@@ -685,8 +611,6 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
     if (fieldOrder == null) {
       this.resourceType = in.readString();
 
-      this.id = in.readString();
-
       this.event = in.readString();
 
       long size0 = in.readArrayStart();
@@ -722,21 +646,17 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
       }
 
     } else {
-      for (int i = 0; i < 6; i++) {
+      for (int i = 0; i < 5; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.resourceType = in.readString();
           break;
 
         case 1:
-          this.id = in.readString();
-          break;
-
-        case 2:
           this.event = in.readString();
           break;
 
-        case 3:
+        case 2:
           long size0 = in.readArrayStart();
           java.util.List<java.lang.String> a0 = this.participant;
           if (a0 == null) {
@@ -753,11 +673,11 @@ public class AuditEvent extends org.apache.avro.specific.SpecificRecordBase impl
           }
           break;
 
-        case 4:
+        case 3:
           this.source = in.readString();
           break;
 
-        case 5:
+        case 4:
           long size1 = in.readArrayStart();
           java.util.List<java.lang.String> a1 = this.object;
           if (a1 == null) {

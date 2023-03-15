@@ -5,7 +5,6 @@
   "version": "1",
   "fields": [
     { "name": "resourceType", "type": "string" },
-    { "name": "id", "type": "string" },
     { "name": "event", "type": "string" },
     { "name": "participant", "type": {"type":  "array", "items":  "string"}, "java-class":  "java.util.ArrayList" },
     { "name": "source", "type": "string" },
