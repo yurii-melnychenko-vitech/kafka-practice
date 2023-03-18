@@ -1,5 +1,6 @@
 package org.example;
 
+import com.google.gson.Gson;
 import org.example.model.AuditEvent;
 import org.springframework.kafka.annotation.DltHandler;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -13,11 +14,11 @@ import java.util.List;
 
 @Component
 public class KafkaConsumer {
-    private final AuditEventRepository auditEventRepository;
+    private final EventRepository auditRepository;
     public static List<AuditEvent> dltAuditEvents = new ArrayList<>();
 
-    public KafkaConsumer(AuditEventRepository auditEventRepository) {
-        this.auditEventRepository = auditEventRepository;
+    public KafkaConsumer(EventRepository auditRepository) {
+        this.auditRepository = auditRepository;
     }
     @KafkaListener(
             topics = {"${first-topic.name.consumer}", "${second-topic.name.consumer}"},
@@ -38,8 +39,13 @@ public class KafkaConsumer {
             throw new RuntimeException("test kafka exception");
         }
 
-        this.auditEventRepository.save(auditEvent);
-        System.out.println("Received Message: " + auditEvent);
+        Event event = Event.builder()
+                .resourceType(auditEvent.getClass().getTypeName())
+                .resource(new Gson().toJson(auditEvent))
+                .build();
+
+        this.auditRepository.save(event);
+        System.out.println("Received Message: " + event);
     }
 
     @DltHandler
